@@ -21,17 +21,33 @@ public class Shows {
 	}
 
 	private static void menu(Connection conn, Scanner sc) {
-		System.out.println("Please choose one of the following options: \n"
-							+"1) Show all shows \n" 
-							+"2) Show shows by Id");
-		int option = sc.nextInt();
-		switch(option) {
+		
+		while (true) {
+			System.out.println("\nPlease choose one of the following options: \n" 
+								+ "1) Show all shows \n"
+								+ "2) Show shows by Id\n" 
+								+ "3) Exit");
+			int option = sc.nextInt();
+			switch (option) {
 			case 1:
 				showShows(conn);
+				break;
 			case 2:
 				showsByID(conn);
+				break;
+			case 3:
+				break;
+			default:
+				System.out.println("Please provide a number between 1 and 3 ");
+				break;
+
+			}
+			
+			if (option==3) {
+				break;
+			}
 		}
-		
+
 	}
 
 	
