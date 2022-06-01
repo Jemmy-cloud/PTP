@@ -30,18 +30,15 @@ public class Shows {
 		
 		while (true) {
 			System.out.println("\nPlease choose one of the following options: \n" 
-								+ "Enter 1 to Show all shows \n"
-								+ "Enter 2 to Show shows by Id\n" 
-								+ "Enter 3 to Exit");
+								
+								+ "Enter 1 to Show your shows\n" 
+								+ "Enter 2 to Exit");
 			int option = sc.nextInt();
 			switch (option) {
 			case 1:
-				showShows(conn);
-				break;
-			case 2:
 				showsByID(conn);
 				break;
-			case 3:
+			case 2:
 				break;
 			default:
 				System.out.println("Please provide a number between 1 and 3 ");
