@@ -20,13 +20,13 @@ public class Shows {
 		
 	}
 
-	private static void menu(Connection conn, Scanner sc) {
+	public static void menu(Connection conn, Scanner sc) {
 		
 		while (true) {
 			System.out.println("\nPlease choose one of the following options: \n" 
-								+ "1) Show all shows \n"
-								+ "2) Show shows by Id\n" 
-								+ "3) Exit");
+								+ "Enter 1 to Show all shows \n"
+								+ "Enter 2 to Show shows by Id\n" 
+								+ "Enter 3 to Exit");
 			int option = sc.nextInt();
 			switch (option) {
 			case 1:

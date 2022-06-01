@@ -49,7 +49,7 @@ public class ShowDAOClass implements ShowDAO {
 	public Show getShowById(int showid) {
 		
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM department WHERE dept_id = ?");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM department WHERE showid = ?");
 			pstmt.setInt(1, showid);
 			
 			ResultSet rs = pstmt.executeQuery();
@@ -76,7 +76,7 @@ public class ShowDAOClass implements ShowDAO {
 	
 	public Show getShowByName(String showname) {
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM department WHERE showname = ?");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows WHERE showname = ?");
 			pstmt.setString(1, showname);
 			
 			ResultSet rs = pstmt.executeQuery();
