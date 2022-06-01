@@ -16,6 +16,8 @@ public class FirstMenu {
 		Connection conn = ConnectionManager.getConnection();
 		Scanner scan = new Scanner(System.in);
 		
+		
+		while(true) {
 		System.out.println("Welcome, please choose one of the following options");
 		System.out.println("Enter 1 to Show all of your shows");
 		System.out.println("Enter 2 to Edit all of your shows");
@@ -45,7 +47,7 @@ public class FirstMenu {
 		}
 		
 		
-		
+		}
 
 	}
 
