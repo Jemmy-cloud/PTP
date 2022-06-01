@@ -23,6 +23,7 @@ public class ConnectionManager {
 
 		} catch (SQLException e) {
 			System.out.println("Could not connect to database");
+			e.printStackTrace();
 		}
 
 	}
