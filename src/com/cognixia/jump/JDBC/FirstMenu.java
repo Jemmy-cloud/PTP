@@ -11,6 +11,7 @@ public class FirstMenu {
 	public static void main(String[] args) {
 
 
+		
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("Welcome, please choose one of the following options");
@@ -30,8 +31,11 @@ public class FirstMenu {
 				System.out.println("\n--------------------------");
 				System.out.print(show);
 				
-			
 			}
+			
+			
+			
+		} else if (userInput == 2) {
 			
 		}
 		
