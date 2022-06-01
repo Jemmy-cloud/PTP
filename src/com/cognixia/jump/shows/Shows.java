@@ -20,7 +20,7 @@ public class Shows {
 		
 	}
 
-	private static void menu(Connection conn, Scanner sc) {
+	public static void menu(Connection conn, Scanner sc) {
 		
 		while (true) {
 			System.out.println("\nPlease choose one of the following options: \n" 

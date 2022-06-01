@@ -1,17 +1,19 @@
 package com.cognixia.jump.JDBC;
 
+import java.sql.Connection;
 import java.util.Scanner;
 
 import com.cognixia.jump.JDBC.dao.Show;
 import com.cognixia.jump.JDBC.dao.ShowDAO;
 import com.cognixia.jump.JDBC.dao.ShowDAOClass;
+import com.cognixia.jump.shows.Shows;
 
 public class FirstMenu {
 
 	public static void main(String[] args) {
 
 
-		
+		Connection conn = ConnectionManager.getConnection();
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("Welcome, please choose one of the following options");
@@ -36,6 +38,9 @@ public class FirstMenu {
 			
 			
 		} else if (userInput == 2) {
+//			Shows shows = new Shows();
+			Shows.menu(conn, scan);
+			
 			
 		}
 		
