@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.Random;
 
 import com.cognixia.jump.JDBC.ConnectionManager;
 
@@ -17,7 +18,6 @@ public class CreateUser {
 	private static String password;
 
 	public static void main(String[] args) {
-		id = 1234;
 		menu(conn, sc);
 		
 	}
@@ -55,7 +55,8 @@ public class CreateUser {
 		try {
 			
 			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO users VALUES(?,?,?)");
-			pstmt.setInt(1, id++);
+			id = (int) (Math.random() * 10000);
+			pstmt.setInt(1, id);
 			System.out.println("\nEmail: ");
 			email = sc.next();
 			pstmt.setString(2, email);
