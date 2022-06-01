@@ -1,6 +1,8 @@
 package com.cognixia.jump.JDBC;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.cognixia.jump.JDBC.dao.Show;
@@ -50,5 +52,29 @@ public class FirstMenu {
 		}
 
 	}
+	
+	
+	
+	
+	public static List<Show> NotCompletedShowsList () {
+		
+		List<Show> NotCompletedShowsList = new ArrayList<Show>();
+		List<Show> CompletedShowsList = new ArrayList<Show>();
+		List<Show> InprogressShowsList = new ArrayList<Show>();
+		
+		
+		ShowDAOClass showDAO = new ShowDAOClass();
+		List<Show> allShows = showDAO.getAllShows();
+		
+		
+		
+		
+		
+		return NotCompletedShowsList;
+	};
+	
+	
+	
+	
 
 }

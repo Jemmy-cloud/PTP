@@ -8,13 +8,26 @@ public class ShowDAORunner {
 
 
 		ShowDAO showDAO = new ShowDAOClass();
-
+		WatchedDAOClass watchedDAO = new WatchedDAOClass();
 		
 		System.out.println("All Shows");
 		
 		
 		for (Show show : showDAO.getAllShows()) {
 			System.out.print(show);
+		
+		}
+		
+		
+		
+		
+		System.out.println("All Watched shows");
+		System.out.println("All Watched shows");
+		
+		
+		for (Watched watched : watchedDAO.getAllWatchedShows()) {
+			System.out.println("Hello");
+			System.out.print(watched);
 		
 		}
 	}
