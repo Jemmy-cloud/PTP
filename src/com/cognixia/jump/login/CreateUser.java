@@ -130,7 +130,8 @@ public class CreateUser {
 								+ "1) View my Watchlist\n"
 								+ "2) Update Watchlist\n"
 								+ "3) Add to Watchlist\n"
-								+ "4) Exit\n");
+								+ "4) Delete from Watchlist\n"
+								+ "5) Logout\n");
 				int option = sc.nextInt();
 				switch (option) {
 				case 1:
@@ -143,13 +144,16 @@ public class CreateUser {
 					addToWatchList(userid);
 					break;
 				case 4:
+					deleteWatchList(userid);
+					break;
+				case 5:
 					break;
 				default:
-					System.out.println("please provide a number 1-4");
+					System.out.println("please provide a number 1-5");
 
 				}
 
-				if (option == 4) {
+				if (option == 5) {
 					break;
 				}
 			}
@@ -164,6 +168,31 @@ public class CreateUser {
 		
 		
 	
+	private static void deleteWatchList(int userid) {
+		viewWatchList(userid);
+		System.out.println("\nSelect a show by id from your watchlist you would like to delete\n");
+		int showid = sc.nextInt();
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement("DELETE FROM watched WHERE showid = ? AND userid = ?");
+			pstmt.setInt(1, showid);
+			pstmt.setInt(2, userid);
+			int count = pstmt.executeUpdate();
+			if(count>0) {
+				System.out.println("Successfully deleted show!!!!");
+			}else {
+				System.out.println("Unable to delete show :(");
+			}
+		} catch (SQLException e) {
+			System.out.println("Not able to delete show :(");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+
 	// when adding to watch list progress will be set to 0. User can update progress (episodes watched) with the update watchlist
 	private static void addToWatchList(int userid) {
 		
@@ -215,9 +244,10 @@ public class CreateUser {
 		System.out.println("\nHow many episodes of this show have you watched? ");
 		int progress = sc.nextInt();                                                // TO DO. must be higher than previous and lower than total number of episodes
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("UPDATE watched SET progress = ? WHERE showid = ?");
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE watched SET progress = ? WHERE showid = ? AND userid = ?");
 			pstmt.setInt(1, progress);
 			pstmt.setInt(2, showid);
+			pstmt.setInt(3, userid);
 			int count = pstmt.executeUpdate();
 			if(count>0) {
 				System.out.println("Successfully updated show!!!!");
@@ -250,7 +280,7 @@ public class CreateUser {
 				System.out.printf("%-5s", "ID: " + showid + "  ");
 				System.out.printf("%-20s", showname);
 				System.out.printf("%-10s", "You have watched " + rs.getInt("progress") + " Episodes");
-				System.out.printf("%-10s", "  out of " + rs.getInt("episodes"));
+				System.out.printf("%-10s", " out of " + rs.getInt("episodes"));
 				
 				System.out.printf("%-10s %n", " you are " + percent + "% done!");
 
