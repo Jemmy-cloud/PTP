@@ -4,9 +4,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Scanner;
 
 import com.cognixia.jump.JDBC.ConnectionManager;
+import com.cognixia.jump.JDBC.dao.Show;
+import com.cognixia.jump.JDBC.dao.Watched;
+import com.cognixia.jump.progress.Progress;
 
 public class Shows {
 	
@@ -30,26 +34,55 @@ public class Shows {
 		
 		while (true) {
 			System.out.println("\nPlease choose one of the following options: \n" 
-								+ "Enter 1 to Show all shows \n"
-								+ "Enter 2 to Show shows by Id\n" 
-								+ "Enter 3 to Exit");
+								
+								+ "Enter 1 to Show your shows\n" 
+								+ "Enter 2 to show 'in-progress' shows\n"
+								+ "Enter 3 to show the shows that you haven't started yet 'not-completed'\n"
+								+ "Enter 4 to show 'completed' shows\n"
+								+ "Enter 5 to Exit");
 			int option = sc.nextInt();
 			switch (option) {
 			case 1:
-				showShows(conn);
-				break;
-			case 2:
 				showsByID(conn);
 				break;
+			case 2:
+				List<Watched> mylist = Progress.showInprogress();
+				if (mylist.size() == 0) {
+					System.out.println("You have no shows ");
+				}
+				for (Watched sh : mylist) {
+					System.out.println(sh);
+				}
+				
+				break;
 			case 3:
+				List<Show> mylist1 = Progress.notStartedShows();
+				if (mylist1.size() == 0) {
+					System.out.println("You have no shows ");
+				}
+				for (Show sh : mylist1) {
+					System.out.println(sh);
+				}
+				break;
+			case 4:
+				
+				List<Show> mylist3 = Progress.completedShows();
+				if (mylist3.size() == 0) {
+					System.out.println("You have no shows ");
+				}
+				for (Show sh : mylist3) {
+					System.out.println(sh);
+				}
+				
+			case 5:
 				break;
 			default:
-				System.out.println("Please provide a number between 1 and 3 ");
+				System.out.println("Please provide a number between 1 and 4 ");
 				break;
 
 			}
 			
-			if (option==3) {
+			if (option==5) {
 				break;
 			}
 		}
@@ -62,7 +95,7 @@ public class Shows {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM watched JOIN shows ON watched.showid = shows.showid");
 			
-			System.out.println("\nHere are all the shows that you have watched \n");
+			System.out.println("\nHere are all the shows that you have \n");
 			
 			while(rs.next()) {
 				System.out.printf("%-20s", rs.getString("showname"));
