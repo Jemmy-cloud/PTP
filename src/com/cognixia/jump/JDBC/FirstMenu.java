@@ -68,6 +68,7 @@ public class FirstMenu {
 	private static void menu2() {
 
 		while (true) {
+			System.out.println("------------------- WELCOME -----------------------");
 			System.out.println("please choose one of the following options");
 			System.out.println("Enter 1 to Show all of your shows");
 			System.out.println("Enter 2 to Edit all of your shows");
@@ -84,13 +85,22 @@ public class FirstMenu {
 					System.out.print(show);
 
 				}
+				
 
+				System.out.println("\n---------------------------------------------------");
+				System.out.println("\n---------------------------------------------------");
+				
 			} else if (userInput == 2) {
-				Shows.menu(conn, sc);
+		
+				menuWatch(email);
 			}
 
 		}
 	}
+	
+	
+	
+	
 
 	private static void signUp() {
 		try {
@@ -134,7 +144,7 @@ public class FirstMenu {
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				menuWatch(email);
+				menu2();
 				
 			} else {
 				System.out.println("Unable to login");
@@ -183,8 +193,8 @@ public class FirstMenu {
 			} else {
 				System.out.println("\nWatchlist not updated\n");
 			}
-			
-			menu2();
+			Shows.menu(conn, sc);
+//			menu2();
 
 		} catch (SQLException e) {
 			System.out.println("Unable to update watchlist :( ");

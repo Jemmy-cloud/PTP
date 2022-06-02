@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 import com.cognixia.jump.JDBC.ConnectionManager;
-import com.cognixia.jump.progressmove.Progress;
+import com.cognixia.jump.progress.Progress;
 
 public class Shows {
 	
