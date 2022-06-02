@@ -5,12 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.List;
 import java.util.Random;
 
 import com.cognixia.jump.JDBC.ConnectionManager;
 import com.cognixia.jump.JDBC.dao.Show;
 import com.cognixia.jump.JDBC.dao.ShowDAO;
 import com.cognixia.jump.JDBC.dao.ShowDAOClass;
+import com.cognixia.jump.JDBC.dao.Watched;
+import com.cognixia.jump.progress.Progress;
 
 public class CreateUser {
 	
@@ -285,6 +288,41 @@ public class CreateUser {
 				System.out.printf("%-10s %n", " you are " + percent + "% done!");
 
 			}
+			
+			
+			
+			// Not started
+			List<Show> notStarted = Progress.notStartedShows(userid);
+			System.out.println("\nNot Started\n------------------------------------------------");
+			if (notStarted.size() == 0) {
+				System.out.println("You have not started any shows ");
+			}
+			for (Show sh : notStarted) {
+				System.out.println(sh);
+			}
+			
+			
+			// In progress
+			List<Watched> inprogress = Progress.showInprogress(userid);
+			System.out.println("\nIn progress\n------------------------------------------------");
+			if (inprogress.size() == 0) {
+				System.out.println("You have no shows in progress ");
+			}
+			for (Watched sh : inprogress) {
+				System.out.println(sh);
+			}
+			
+		
+			// Finished
+			List<Show> completed = Progress.completedShows(userid);
+			System.out.println("\nComplete\n------------------------------------------------");
+			if (completed.size() == 0) {
+				System.out.println("You have not completed any shows ");
+			}
+			for (Show sh : completed) {
+				System.out.println(sh);
+			}
+			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

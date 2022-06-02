@@ -46,30 +46,33 @@ public class Shows {
 				showsByID(conn);
 				break;
 			case 2:
-				List<Watched> mylist = Progress.showInprogress();
+				List<Watched> mylist = Progress.showInprogress(1234);
 				if (mylist.size() == 0) {
 					System.out.println("You have no shows ");
 				}
+				System.out.println("\nIn progress\n------------------------------------------------");
 				for (Watched sh : mylist) {
 					System.out.println(sh);
 				}
 				
 				break;
 			case 3:
-				List<Show> mylist1 = Progress.notStartedShows();
+				List<Show> mylist1 = Progress.notStartedShows(1234);
 				if (mylist1.size() == 0) {
 					System.out.println("You have no shows ");
 				}
+				System.out.println("\nNot Started\n------------------------------------------------");
 				for (Show sh : mylist1) {
 					System.out.println(sh);
 				}
 				break;
 			case 4:
 				
-				List<Show> mylist3 = Progress.completedShows();
+				List<Show> mylist3 = Progress.completedShows(1234);
 				if (mylist3.size() == 0) {
-					System.out.println("You have no shows ");
+					System.out.println("You have not finished ant shows ");
 				}
+				System.out.println("\nComplete\n------------------------------------------------");
 				for (Show sh : mylist3) {
 					System.out.println(sh);
 				}
