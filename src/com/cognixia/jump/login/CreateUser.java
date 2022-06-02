@@ -84,7 +84,7 @@ public class CreateUser {
 		
 	}
 
-	private static void login() {
+	public static void login() {
 		
 		try {
 		
