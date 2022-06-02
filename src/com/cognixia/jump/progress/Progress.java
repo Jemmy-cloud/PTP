@@ -18,26 +18,32 @@ public class Progress {
 	
 	
 	
-public static List<Watched> showInprogress() {
+public static List<Watched> showInprogress(int userid) {
 		
-		List<Watched> inprogress = new ArrayList<Watched>();
-		
-		WatchedDAOClass watchedDAO = new WatchedDAOClass();
-		
-		for (Watched watched : watchedDAO.getAllWatchedShows()) {
-			if (watched.getProgress() != 0 )
-			inprogress.add(watched);
-		
+	List<Watched> inprogress = new ArrayList<Watched>();
+	Connection conn = ConnectionManager.getConnection();
+	ShowDAOClass show = new ShowDAOClass();
+	List<Show> allShows = show.getAllShows();
+
+	WatchedDAOClass watched = new WatchedDAOClass();
+	List<Watched> inprogressShows = watched.getAllWatchedShows(userid);
+
+	for (Show show1 : allShows) {
+		for (Watched watched1 : inprogressShows) {
+			if ((show1.getShowid() == watched1.getShowId()) && (watched1.getProgress() != show1.getEpisodes()) && (watched1.getProgress() !=  0)) {
+				inprogress.add(watched1);
+			}
 		}
-		
-		return inprogress;
-		
+	}
+
+	return inprogress;
+
 	}
 
 
 
 
-	public static List<Show> notStartedShows() {
+	public static List<Show> notStartedShows(int userid) {
 		
 		List<Show> notStarted = new ArrayList<Show>();
 		
@@ -46,7 +52,7 @@ public static List<Watched> showInprogress() {
 		ShowDAOClass show = new ShowDAOClass();
 		List<Show> allShows = show.getAllShows();
 		WatchedDAOClass watched = new WatchedDAOClass();
-		List<Watched> inprogressShows = watched.getAllWatchedShows(); 
+		List<Watched> inprogressShows = watched.getAllWatchedShows(userid); 
 		
 		
 		for (Show show1 : allShows) {
@@ -65,7 +71,7 @@ public static List<Watched> showInprogress() {
 	}
 	
 	
-	public static List<Show> completedShows() {
+	public static List<Show> completedShows(int userid) {
 		
 		
 		List<Show> completedShows = new ArrayList<Show>();
@@ -74,12 +80,12 @@ public static List<Watched> showInprogress() {
 		List<Show> allShows = show.getAllShows();
 		
 		WatchedDAOClass watched = new WatchedDAOClass();
-		List<Watched> inprogressShows = watched.getAllWatchedShows(); 
+		List<Watched> inprogressShows = watched.getAllWatchedShows(userid); 
 		
 		
 		for (Show show1 : allShows) {
 			for (Watched watched1 : inprogressShows) {
-				if (show1.getShowid() != watched1.getShowId() & watched1.getProgress() == show1.getEpisodes()) {
+				if ((show1.getShowid() == watched1.getShowId()) && (watched1.getProgress() == show1.getEpisodes())) {
 					completedShows.add(show1);
 				}
 			}

@@ -1,6 +1,7 @@
 package com.cognixia.jump.JDBC.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,16 +14,19 @@ public class WatchedDAOClass {
 
 	private Connection conn = ConnectionManager.getConnection();
 	
-	public List<Watched> getAllWatchedShows(){ 
+	public List<Watched> getAllWatchedShows(int userid){ 
 		
 		try {
 			
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM watched JOIN shows ON watched.showid = shows.showid");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM watched JOIN shows ON watched.showid = shows.showid WHERE userid = ?");
 			List<Watched> watchedList = new ArrayList<Watched>();
 			List<Watched> notStarted = new ArrayList<Watched>();
 			List<Watched> completed = new ArrayList<Watched>();
 			List<Watched> inprogress = new ArrayList<Watched>();
+			
+			pstmt.setInt(1, userid);
+			ResultSet rs = pstmt.executeQuery();
+			
 			
 			while(rs.next()) {
 				int userId = rs.getInt("userid");
