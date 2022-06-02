@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 import com.cognixia.jump.JDBC.ConnectionManager;
+import com.cognixia.jump.progressmove.Progress;
 
 public class Shows {
 	
@@ -32,13 +33,16 @@ public class Shows {
 			System.out.println("\nPlease choose one of the following options: \n" 
 								
 								+ "Enter 1 to Show your shows\n" 
-								+ "Enter 2 to Exit");
+								+ "Enter 2 to show 'in-progress' shows"
+								+ "Enter 3 to Exit");
 			int option = sc.nextInt();
 			switch (option) {
 			case 1:
 				showsByID(conn);
 				break;
 			case 2:
+				Progress.showInprogress();
+			case 3:
 				break;
 			default:
 				System.out.println("Please provide a number between 1 and 3 ");

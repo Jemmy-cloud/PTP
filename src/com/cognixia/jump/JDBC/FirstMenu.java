@@ -11,6 +11,8 @@ import java.util.Scanner;
 import com.cognixia.jump.JDBC.dao.Show;
 import com.cognixia.jump.JDBC.dao.ShowDAO;
 import com.cognixia.jump.JDBC.dao.ShowDAOClass;
+import com.cognixia.jump.JDBC.dao.Watched;
+import com.cognixia.jump.JDBC.dao.WatchedDAOClass;
 import com.cognixia.jump.shows.Shows;
 
 public class FirstMenu {
@@ -66,7 +68,7 @@ public class FirstMenu {
 	private static void menu2() {
 
 		while (true) {
-			System.out.println("Welcome, please choose one of the following options");
+			System.out.println("please choose one of the following options");
 			System.out.println("Enter 1 to Show all of your shows");
 			System.out.println("Enter 2 to Edit all of your shows");
 
@@ -157,12 +159,12 @@ public class FirstMenu {
 			int userid = rs.getInt(1);
 			pstmt2.setInt(1, userid);
 
-			System.out.println("Please select a show to add to your watchlist by id: ");
+			System.out.println("\nPlease select a show to add to your watchlist by id: ");
 
 			ShowDAO showDAO = new ShowDAOClass();
 			for (Show show : showDAO.getAllShows()) {
 				System.out.println(
-						"\n----------------------------------------------------------------------------------");
+						"\n----------------------------------------------------------------------------------\n");
 				System.out.print(show);
 			}
 
@@ -190,5 +192,8 @@ public class FirstMenu {
 		}
 
 	}
+	
+	
+	
 
 }
